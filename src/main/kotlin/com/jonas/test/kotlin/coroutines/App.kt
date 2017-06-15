@@ -7,7 +7,7 @@ import kotlin.coroutines.experimental.*
  */
 fun main(args: Array<String>) {
     println("Call main")
-    async {
+    runSuspend {
         suspend1()
         suspend2()
         suspend3()
@@ -23,7 +23,7 @@ fun main(args: Array<String>) {
     readLine()
 }
 
-fun async(block: suspend () -> Unit) {
+fun runSuspend(block: suspend () -> Unit) {
     val continuation = object : Continuation<Unit> {
         override val context: CoroutineContext
             get() = EmptyCoroutineContext
@@ -45,7 +45,7 @@ suspend fun suspend1() {
     println("im suspend1")
     suspendCoroutine<Unit> { cont ->
         println("suspend the 1")
-        cont.resume(Unit)
+        // cont.resume(Unit)
     }
 }
 
